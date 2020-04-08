@@ -13,17 +13,31 @@ class App extends React.Component {
       }
     };
 
-  landsatUrl = () => {
+  landsatUrl = (pan = false) => {
     const params = {
       bands: "4,3,2",
-      color_ops: "gamma RGB 3.5, saturation 1.7, sigmoidal RGB 15 0.35"
+      color_ops: "gamma RGB 3.5, saturation 1.7, sigmoidal RGB 15 0.35",
     };
+    if (pan) {
+      params.pan = true;
+    }
     const searchParams = new URLSearchParams(params);
     let baseUrl =
-      "https://landsat-lambda.kylebarron.dev/tiles/e276a5acd25d7f2abc6c1233067628822d4de9c96b3c8977a168fee7/{z}/{x}/{y}@2x.png?";
+      "https://landsat-lambda.kylebarron.dev/tiles/229bc0ed88ac7f39effdb554efa0959766e41bb3948754faba13f74f/{z}/{x}/{y}@2x.jpg?";
     baseUrl += searchParams.toString();
     return baseUrl;
 
+  }
+
+  naipUrl = () => {
+    const params = {
+      color_ops: "sigmoidal RGB 4 0.5, saturation 1.25"
+    };
+    const searchParams = new URLSearchParams(params);
+    let baseUrl =
+      "https://naip-lambda.kylebarron.dev/7610d6d77fca346802fb21b89668cb12ef3162a31eb71734a8aaf5de/{z}/{x}/{y}@2x.jpg?";
+      baseUrl += searchParams.toString();
+      return baseUrl;
   }
 
   render() {
@@ -34,28 +48,39 @@ class App extends React.Component {
         height="100vh"
         mapOptions={{ hash: true }}
         mapStyle="https://raw.githubusercontent.com/kylebarron/fiord-color-gl-style/master/style.json"
-        onViewportChange={viewport => this.setState({ viewport })}
+        onViewportChange={(viewport) => this.setState({ viewport })}
       >
         <Source
           id="naip-lambda"
           type="raster"
-          url="https://naip-lambda.kylebarron.dev/4c4d507790e8afa837215677bd6f74f58711bfaf3e1d5f7226193e12/tilejson.json?tile_scale=2"
+          minzoom={12}
+          maxzoom={16}
+          tiles={[this.naipUrl()]}
           tileSize={512}
         >
-          <Layer id="naip-lambda-layer" type="raster" />
+          <Layer id="naip-lambda-layer" type="raster" minzoom={12} />
         </Source>
 
         <Source
           id="landsat-lambda"
           type="raster"
           tileSize={512}
-          tiles={[
-            this.landsatUrl()
-          ]}
+          tiles={[this.landsatUrl()]}
           minzoom={7}
+          maxzoom={11}
+        >
+          <Layer id="landsat-lambda-layer" type="raster" maxzoom={11} />
+        </Source>
+
+        <Source
+          id="landsat-lambda-pan"
+          type="raster"
+          tileSize={512}
+          tiles={[this.landsatUrl(true)]}
+          minzoom={11}
           maxzoom={12}
         >
-          <Layer id="landsat-lambda-layer" type="raster" minzoom={7} maxzoom={12} />
+          <Layer id="landsat-lambda-layer-pan" type="raster" maxzoom={12} />
         </Source>
       </ReactMapGL>
     );
@@ -63,5 +88,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-document.body.style.margin = 0;
