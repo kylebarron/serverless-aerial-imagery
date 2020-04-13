@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6842d8d4397539ab1c381b8ca8776177",
+    "revision": "219ba5c606bb74148a408c9cabff6e87",
     "url": "/serverless-aerial-imagery/index.html"
   },
   {
-    "revision": "57777f8912d5ea317b43",
+    "revision": "1bc0fe582b24f1eb2939",
     "url": "/serverless-aerial-imagery/static/css/main.d1b05096.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/serverless-aerial-imagery/static/js/2.8eb9d156.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "57777f8912d5ea317b43",
-    "url": "/serverless-aerial-imagery/static/js/main.067c8e64.chunk.js"
+    "revision": "1bc0fe582b24f1eb2939",
+    "url": "/serverless-aerial-imagery/static/js/main.097ee181.chunk.js"
   },
   {
     "revision": "c7cffd753380cda04ff9",

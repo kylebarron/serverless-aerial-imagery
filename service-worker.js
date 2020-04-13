@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/serverless-aerial-imagery/precache-manifest.17ae4f0b852290612677a5c0b1c95f7c.js"
+  "/serverless-aerial-imagery/precache-manifest.3fe891aece7a66163a029aeb09baf52f.js"
 );
 
 self.addEventListener('message', (event) => {
