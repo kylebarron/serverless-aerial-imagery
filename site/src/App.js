@@ -31,13 +31,14 @@ class App extends React.Component {
 
   naipUrl = () => {
     const params = {
-      color_ops: "sigmoidal RGB 4 0.5, saturation 1.25"
+      url:
+        "dynamodb://us-west-2/7610d6d77fca346802fb21b89668cb12ef3162a31eb71734a8aaf5de",
+      color_ops: "sigmoidal RGB 4 0.5, saturation 1.25",
     };
     const searchParams = new URLSearchParams(params);
-    let baseUrl =
-      "https://naip-lambda.kylebarron.dev/7610d6d77fca346802fb21b89668cb12ef3162a31eb71734a8aaf5de/{z}/{x}/{y}@2x.jpg?";
-      baseUrl += searchParams.toString();
-      return baseUrl;
+    let baseUrl = "https://naip-lambda.kylebarron.dev/{z}/{x}/{y}@2x.jpg?";
+    baseUrl += searchParams.toString();
+    return baseUrl;
   }
 
   render() {
